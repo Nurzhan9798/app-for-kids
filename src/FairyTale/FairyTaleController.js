@@ -42,7 +42,7 @@ class FairyTaleController {
       });
       return res.json(fairyTale);
     } catch (e) {
-      res.status(400).json(e.message);
+      res.status(500).json(e.message);
     }
   }
   async delete(req, res) {

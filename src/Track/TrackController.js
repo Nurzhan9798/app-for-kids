@@ -43,7 +43,7 @@ class TrackController {
       });
       return res.json(track);
     } catch (e) {
-      res.status(400).json(e.message);
+      res.status(500).json(e.message);
     }
   }
   async delete(req, res) {

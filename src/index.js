@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import FairyTaleRouter from "./FairyTale/FairyTaleRouter.js";
 import TrackRouter from "./Track/TrackRouter.js";
+import ProfileRouter from "./Profile/ProfileRouter.js";
 
 const app = express();
 const PORT = 3001;
@@ -10,6 +11,7 @@ const PORT = 3001;
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use("/fairy-tale", FairyTaleRouter);
 app.use("/track", TrackRouter);
+app.use("/profile", ProfileRouter);
 app.use("/images", express.static("uploads/images"));
 app.use("/audios", express.static("uploads/audios"));
 
