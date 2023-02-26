@@ -6,7 +6,7 @@ import TrackRouter from "./Track/TrackRouter.js";
 import ProfileRouter from "./Profile/ProfileRouter.js";
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3030;
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use("/fairy-tale", FairyTaleRouter);
