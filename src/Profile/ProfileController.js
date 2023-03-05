@@ -35,7 +35,9 @@ class ProfileController {
 
   async getAll(req, res) {
     try {
-      const profiles = await ProfileService.getAll();
+      const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 10;
+      const page = req.query.page ? parseInt(req.query.page - 1) : 0;
+      const profiles = await ProfileService.getAll(pageSize, page);
       return res.json(profiles);
     } catch (e) {
       res.status(500).json(e.message);

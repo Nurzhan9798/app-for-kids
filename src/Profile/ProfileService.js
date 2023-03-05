@@ -67,8 +67,10 @@ class ProfileService {
     return profile;
   }
 
-  async getAll() {
-    const profiles = await Profile.find();
+  async getAll(pageSize, page) {
+    const profiles = await Profile.find()
+      .limit(pageSize)
+      .skip(pageSize * page);
     return profiles;
   }
 

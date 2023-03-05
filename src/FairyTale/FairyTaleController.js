@@ -26,7 +26,9 @@ class FairyTaleController {
 
   async getAll(req, res) {
     try {
-      const fairyTales = await FairyTaleService.getAll();
+      const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 10;
+      const page = req.query.page ? parseInt(req.query.page - 1) : 0;
+      const fairyTales = await FairyTaleService.getAll(pageSize, page);
       return res.json(fairyTales);
     } catch (e) {
       res.status(500).json(e.message);

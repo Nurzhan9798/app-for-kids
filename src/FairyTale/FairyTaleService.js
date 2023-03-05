@@ -13,8 +13,10 @@ class FairyTaleService {
     return fairyTale;
   }
 
-  async getAll() {
-    const fairyTales = await FairyTale.find();
+  async getAll(pageSize, page) {
+    const fairyTales = await FairyTale.find()
+      .limit(pageSize)
+      .skip(pageSize * page);
     return fairyTales;
   }
 

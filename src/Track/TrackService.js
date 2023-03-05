@@ -13,8 +13,10 @@ class TrackService {
     return track;
   }
 
-  async getAll() {
-    const tracks = await Track.find();
+  async getAll(pageSize, page) {
+    const tracks = await Track.find()
+      .limit(pageSize)
+      .skip(pageSize * page);
     return tracks;
   }
 

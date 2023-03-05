@@ -27,7 +27,9 @@ class TrackController {
 
   async getAll(req, res) {
     try {
-      const tracks = await TrackService.getAll();
+      const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 10;
+      const page = req.query.page ? parseInt(req.query.page - 1) : 0;
+      const tracks = await TrackService.getAll(pageSize, page);
       return res.json(tracks);
     } catch (e) {
       res.status(500).json(e.message);
