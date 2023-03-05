@@ -2,13 +2,22 @@ import FileService from "../FileService/FileService.js";
 import ProfileService from "./ProfileService.js";
 
 class ProfileController {
-  async create(req, res) {
+  async registration(req, res) {
     try {
       const createdFile = await FileService.saveFile(req.file);
-      const profile = await ProfileService.create({
+      const profile = await ProfileService.registration({
         ...req.body,
         avatarImg: createdFile,
       });
+      return res.json(profile);
+    } catch (e) {
+      res.status(500).json(e.message);
+    }
+  }
+
+  async login(req, res) {
+    try {
+      const profile = await ProfileService.login(req.body);
       return res.json(profile);
     } catch (e) {
       res.status(500).json(e.message);

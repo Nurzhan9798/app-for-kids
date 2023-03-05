@@ -1,14 +1,25 @@
 import Router from "express";
 import multer from "multer";
 import FairyTaleController from "./FairyTaleController.js";
+import AuthMiddleware from "../middleware/AuthMiddleware.js";
 
 const router = new Router();
 const imageUpload = multer({ dest: "uploads/images" });
 
-router.get("/", FairyTaleController.getAll);
-router.get("/:id", FairyTaleController.get);
-router.post("/", imageUpload.single("coverImg"), FairyTaleController.create);
-router.put("/", imageUpload.single("coverImg"), FairyTaleController.update);
-router.delete("/:id", FairyTaleController.delete);
+router.get("/", AuthMiddleware.checkToken, FairyTaleController.getAll);
+router.get("/:id", AuthMiddleware.checkToken, FairyTaleController.get);
+router.post(
+  "/",
+  AuthMiddleware.checkToken,
+  imageUpload.single("coverImg"),
+  FairyTaleController.create
+);
+router.put(
+  "/",
+  AuthMiddleware.checkToken,
+  imageUpload.single("coverImg"),
+  FairyTaleController.update
+);
+router.delete("/:id", AuthMiddleware.checkToken, FairyTaleController.delete);
 
 export default router;
